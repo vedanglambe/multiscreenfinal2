@@ -12,7 +12,7 @@ function setup() {
   pixelDensity(1);
 
   capture = createCapture(VIDEO);
-  capture.size(320, 240); // Keep low resolution for performance
+  capture.size(160, 120); // Keep low resolution for performance
   capture.hide();
 
   mic = new p5.AudioIn();
@@ -28,9 +28,9 @@ function setup() {
     faceapi.detect(gotResults);
   });
 
-  // Create a particle for every pixel in the webcam feed
-  for (let y = 0; y < capture.height; y++) {
-    for (let x = 0; x < capture.width; x++) {
+  // Create a particle for every 3rd pixel (reducing particle density)
+  for (let y = 0; y < capture.height; y += 3) {  // Increase step size (e.g., 3)
+    for (let x = 0; x < capture.width; x += 3) {  // Increase step size (e.g., 3)
       particles.push(new GhostPixel(x, y));
     }
   }
